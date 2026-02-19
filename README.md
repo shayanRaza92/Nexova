@@ -15,11 +15,24 @@ One AI brain connected to your website and WhatsApp — all at once.
 
 ## How It's Built
 
-The project uses n8n (a workflow automation tool) as its backend instead of traditional server code. Two n8n workflows handle all the logic — no Python server needed.
+This project went through two iterations. It started as a traditional Python backend and was later migrated to n8n for easier maintenance and no-code automation.
 
-### n8n Workflows (The Backend)
+### Previous Backend (Python + FastAPI)
 
-Everything that used to be Python code is now visual n8n workflows.
+The first version was a FastAPI server that handled everything behind the scenes.
+
+- **main.py** — Set up the FastAPI app and enabled CORS so the frontend could talk to it.
+- **routes.py** — Handled incoming requests. Two main routes:
+  - `/chat-whatsapp` — Took a phone number and a message from the website chat widget, generated an AI response, and sent it to the customer's WhatsApp.
+  - `/webhook` — Received incoming WhatsApp messages and auto-replied using AI.
+- **chat_engine.py** — The brain of the bot. Used the Groq API to run a large language model (LLama 3.3 70B). When a message came in, it searched the knowledge base for relevant context, built a prompt, and sent it to the LLM to get a response.
+- **knowledge_base.py** — A simple keyword-based search over a text file. It split the file into paragraphs and scored them based on how many words from the user's query appeared in each paragraph. The top results became the "context" that the AI used to answer.
+
+This approach worked, but it required managing a Python server, dependencies, and deployment. So it was replaced with n8n.
+
+### Current Backend (n8n Workflows)
+
+The entire Python backend was replaced with n8n — a workflow automation tool that lets you build the same logic visually, without writing server code. Two workflows handle everything now.
 
 **Workflow 1: Website Chat to WhatsApp**
 - Receives a message from the website chat widget via webhook
