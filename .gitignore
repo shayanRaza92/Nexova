@@ -30,3 +30,9 @@ desktop.ini
 
 # Logs
 *.log
+
+# Node
+node_modules/
+
+# n8n local database (workflows are exported to n8n-workflows/ instead)
+.n8n/
