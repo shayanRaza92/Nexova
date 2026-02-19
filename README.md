@@ -47,7 +47,7 @@ The entire Python backend was replaced with n8n — a workflow automation tool t
 - Searches the knowledge base and generates an AI response
 - Sends the reply back to the customer on WhatsApp automatically
 
-Both workflows are exported as JSON in the `n8n-workflows/` folder so they can be version-controlled and imported on any machine.
+Both workflows are exported as JSON in the `n8n-workflow/` folder so they can be version-controlled and imported on any machine.
 
 ### Meta Proxy (meta_proxy.js)
 
@@ -108,7 +108,7 @@ n8n start
 Then import the workflows:
 
 ```
-n8n import:workflow --input=n8n-workflows/all-workflows.json
+n8n import:workflow --input=n8n-workflow/n8n-workflow.json
 ```
 
 Open n8n at `http://localhost:5678`, go into each workflow, and add your credentials:
@@ -143,8 +143,8 @@ nexova/
 │   ├── index.html           # Main landing page + chat widget
 │   ├── styles.css           # All styles
 │   └── simulator.html       # WhatsApp chat simulator
-├── n8n-workflows/
-│   └── all-workflows.json   # Exported n8n workflows
+├── n8n-workflow/
+│   └── n8n-workflow.json   # Exported n8n workflows
 ├── meta_proxy.js            # Meta webhook verification proxy
 ├── data/
 │   └── dummy_data.txt       # Business knowledge base
